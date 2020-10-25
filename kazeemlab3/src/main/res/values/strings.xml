@@ -1,0 +1,10 @@
+<!--Name: Kazeem Ademola Odukale
+Student No: 301021750
+Section: 002 -->
+
+<resources>
+    <string name="app_name">Amination</string>
+    <string name="title_home">Draw</string>
+    <string name="title_dashboard">Frame</string>
+    <string name="title_notifications">Tweened</string>
+</resources>

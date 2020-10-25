@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Name: Kazeem Ademola Odukale
+Student No: 301021750
+Section: 002 -->
+
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="home_background">#e1edcc</color>
+    <color name="dashboard_background">#dcf5f4</color>
+    <color name="notification_background">#e0f5dc</color>
+</resources>
