@@ -9,11 +9,6 @@ public class OdukaleViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public OdukaleViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
-    }
 
-    public LiveData<String> getText() {
-        return mText;
     }
 }

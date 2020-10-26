@@ -23,13 +23,6 @@ public class S301021750Fragment extends Fragment {
         s301021750ViewModel =
                 ViewModelProviders.of(this).get(S301021750ViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        s301021750ViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

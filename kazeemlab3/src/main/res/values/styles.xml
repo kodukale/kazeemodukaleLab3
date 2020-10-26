@@ -12,4 +12,15 @@ Section: 002 -->
 <!--        <item name="android:windowBackground"></item>-->
     </style>
 
+    <style name="home_object">
+        <item name="color">@color/home_object_color</item>
+        <item name="android:textSize">@dimen/home_object_dimen</item>
+        <item name="android:text">@string/home_object_string</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">@dimen/home_object_marginTop</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

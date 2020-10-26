@@ -11,4 +11,5 @@ Section: 002 -->
     <color name="home_background">#e1edcc</color>
     <color name="dashboard_background">#dcf5f4</color>
     <color name="notification_background">#e0f5dc</color>
+    <color name="home_object_color">#136304</color>
 </resources>

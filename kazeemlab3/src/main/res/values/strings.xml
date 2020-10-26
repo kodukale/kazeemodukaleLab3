@@ -7,4 +7,22 @@ Section: 002 -->
     <string name="title_home">Draw</string>
     <string name="title_dashboard">Frame</string>
     <string name="title_notifications">Tweened</string>
+    <string name="exit_app">Exit App ?</string>
+    <string name="exitMessage">If you click Yes app will close ?</string>
+    <string name="exitYes">yes</string>
+    <string name="exitNo">No</string>
+    <string name="home_object_string">Kazeem Odukale 301021750</string>
+    <string name="clear_path">Clear Path</string>
+
+    <string-array name="pen_color">
+        <item>red</item>
+        <item>white</item>
+        <item>black</item>
+    </string-array>
+
+    <string-array name="pen_thickness">
+        <item>3f</item>
+        <item>6f</item>
+        <item>9f</item>
+    </string-array>
 </resources>

@@ -1,35 +1,87 @@
 package kazeem.odukale.s301021750.ui.home;
 
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import kazeem.odukale.s301021750.IOnBackPressed;
+import kazeem.odukale.s301021750.KazeemActivity;
 import kazeem.odukale.s301021750.R;
 
-public class KazeemFragment extends Fragment {
+public class KazeemFragment extends Fragment implements IOnBackPressed {
 
     private KazeemViewModel kazeemViewModel;
+    private CanvasView canvasView;
+    Color selectedColor;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         kazeemViewModel =
                 ViewModelProviders.of(this).get(KazeemViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        kazeemViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final View root = inflater.inflate(R.layout.fragment_home, container, false);
+        canvasView = (CanvasView) root.findViewById(R.id.drawing_canvas);
+        Button buttonSelection = root.findViewById(R.id.pen_selection);
+        buttonSelection.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                Spinner colorSpinner = root.findViewById(R.id.kaeem_pen_color);
+                TextView colorSpinnerText = (TextView) colorSpinner.getSelectedView();
+                Spinner thicknessSpinner = root.findViewById(R.id.kaeem_pen_thickness);
+                TextView thicknessSpinnerText = (TextView)thicknessSpinner.getSelectedView();
+                String thickness = thicknessSpinnerText.getText().toString();
+                String color = colorSpinnerText.getText().toString();
+                canvasView.getSelectedOptions(color, thickness);
+            }
+        });
+
+        Button clearButton = root.findViewById(R.id.pen_clear);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                canvasView.clearPath();
             }
         });
         return root;
+    }
+
+//    public void clearCanvas(View view) {
+//        canvasView.clearPath();
+//    }
+
+    @Override
+    public boolean onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getResources().getString(R.string.exit_app));
+        builder.setIcon(R.drawable.ic_exit_icon);
+        builder.setMessage(getResources().getString(R.string.exitMessage));
+        builder.setPositiveButton(R.string.exitYes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.exit(0);
+            }
+        });
+        builder.setNegativeButton(R.string.exitNo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return true;
     }
 }
