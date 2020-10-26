@@ -86,14 +86,6 @@ public class CanvasView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-//        canvas.drawColor(Color.BLACK);
-//        Paint circlePaint = new Paint();
-//        circlePaint.setColor(Color.RED);
-//        canvas.drawCircle(canvas.getWidth()/2,
-//                canvas.getHeight()/2,
-//                canvas.getWidth()/3, circlePaint);
-
-        // draw the mPath with the mPaint on the canvas when onDraw
         canvas.drawPath(mPath, mPaint);
     }
 

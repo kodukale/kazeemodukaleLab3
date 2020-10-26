@@ -8,12 +8,5 @@ import androidx.lifecycle.ViewModel;
 
 public class KazeemViewModel extends ViewModel {
 
-    public KazeemViewModel() {
-//        mText = new MutableLiveData<>();
-//        mText.setValue("This is home fragment");
-    }
-
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
+    public KazeemViewModel() {}
 }

@@ -20,6 +20,13 @@ Section: 002 -->
         <item>black</item>
     </string-array>
 
+    <string-array name="frame_by_frame_speed">
+        <item>0.2 Secc</item>
+        <item>0.25 Sec</item>
+        <item>0.3 Sec</item>
+        <item>0.35 Sec</item>
+    </string-array>
+
     <string-array name="pen_thickness">
         <item>3f</item>
         <item>6f</item>
