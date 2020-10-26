@@ -13,6 +13,8 @@ Section: 002 -->
     <string name="exitNo">No</string>
     <string name="home_object_string">Kazeem Odukale 301021750</string>
     <string name="clear_path">Clear Path</string>
+    <string name="firstnmae">Kazeem</string>
+    <string name="lastname">Odukale</string>
 
     <string-array name="pen_color">
         <item>red</item>
@@ -26,6 +28,8 @@ Section: 002 -->
         <item>0.3 Sec</item>
         <item>0.35 Sec</item>
     </string-array>
+
+
 
     <string-array name="pen_thickness">
         <item>3f</item>

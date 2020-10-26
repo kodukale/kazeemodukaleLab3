@@ -23,4 +23,9 @@ Section: 002 -->
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="myname">
+        <item name="color">@color/home_object_color</item>
+        <item name="android:textSize">@dimen/home_object_dimen</item>
+    </style>
+
 </resources>
