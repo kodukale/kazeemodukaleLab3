@@ -8,12 +8,5 @@ public class S301021750ViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public S301021750ViewModel() {
-//        mText = new MutableLiveData<>();
-//        mText.setValue("This is notifications fragment");
-    }
-
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
+    public S301021750ViewModel() {}
 }

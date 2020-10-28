@@ -21,7 +21,7 @@ import kazeem.odukale.s301021750.IOnBackPressed;
 import kazeem.odukale.s301021750.KazeemActivity;
 import kazeem.odukale.s301021750.R;
 
-public class KazeemFragment extends Fragment implements IOnBackPressed {
+public class KazeemFragment extends Fragment /*implements IOnBackPressed */{
 
     private KazeemViewModel kazeemViewModel;
     private CanvasView canvasView;
@@ -55,33 +55,5 @@ public class KazeemFragment extends Fragment implements IOnBackPressed {
             }
         });
         return root;
-    }
-
-//    public void clearCanvas(View view) {
-//        canvasView.clearPath();
-//    }
-
-    @Override
-    public boolean onBackPressed() {
-        //super.onBackPressed();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getResources().getString(R.string.exit_app));
-        builder.setIcon(R.drawable.ic_exit_icon);
-        builder.setMessage(getResources().getString(R.string.exitMessage));
-        builder.setPositiveButton(R.string.exitYes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                System.exit(0);
-            }
-        });
-        builder.setNegativeButton(R.string.exitNo, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        return true;
     }
 }
