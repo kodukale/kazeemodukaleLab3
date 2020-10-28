@@ -1,8 +1,17 @@
 package kazeem.odukale.s301021750.ui.dashboard;
 
+import android.Manifest;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.OperationApplicationException;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +19,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import java.util.ArrayList;
 
 import kazeem.odukale.s301021750.R;
 
@@ -25,6 +38,10 @@ public class OdukaleFragment extends Fragment {
     int reasonableDuration;
     AnimationDrawable mframeAnimation;
     ImageView img;
+    private static final String TAG = "Contacts";
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    //private final String LOG = getContext().getSimpleName();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +76,16 @@ public class OdukaleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 stopAnimation();
+            }
+        });
+
+        // implement permission
+        Button buttonPermission = root.findViewById(R.id.kazeem_btn_permission);
+        buttonPermission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertDummyContactWrapper();
+                //insertDummyContact();
             }
         });
         return root;
@@ -97,5 +124,81 @@ public class OdukaleFragment extends Fragment {
     {
         mframeAnimation.stop();
         mframeAnimation.setVisible(false,false);
+    }
+
+    private void insertDummyContactWrapper() {
+        int hasWriteContactsPermission = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            hasWriteContactsPermission = getContext().checkSelfPermission(Manifest.permission.WRITE_CONTACTS);
+
+            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+                return;
+            }
+        }
+        insertDummyContact();
+    }
+
+    private void insertDummyContact() {
+        // Two operations are needed to insert a new contact.
+        ArrayList<ContentProviderOperation> operations = new ArrayList<ContentProviderOperation>(2);
+
+        // First, set up a new raw contact.
+        ContentProviderOperation.Builder op =
+                ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null);
+        operations.add(op.build());
+
+        // Next, set the name for the contact.
+        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
+                        "__DUMMY CONTACT from runtime permissions sample");
+        operations.add(op.build());
+
+        // Apply the operations.
+        ContentResolver resolver = getContext().getContentResolver();
+        try {
+            resolver.applyBatch(ContactsContract.AUTHORITY, operations);
+            Toast.makeText(getContext(), "New contact inserted!", Toast.LENGTH_SHORT)
+                    .show();
+        } catch (RemoteException e) {
+            Log.d(TAG, "Could not add a new contact: " + e.getMessage());
+        } catch (OperationApplicationException e) {
+            Log.d(TAG, "Could not add a new contact: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    Toast.makeText(getContext(), "WRITE_CONTACTS allowed", Toast.LENGTH_SHORT)
+                            .show();
+                    insertDummyContact();
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getContext(), "WRITE_CONTACTS Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getContext())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 }

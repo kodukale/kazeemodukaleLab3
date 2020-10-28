@@ -15,6 +15,7 @@ Section: 002 -->
     <string name="clear_path">Clear Path</string>
     <string name="firstnmae">Kazeem</string>
     <string name="lastname">Odukale</string>
+    <string name="request_permission">request permission</string>
 
     <string-array name="pen_color">
         <item>red</item>

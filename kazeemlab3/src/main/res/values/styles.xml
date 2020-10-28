@@ -23,6 +23,22 @@ Section: 002 -->
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="permission_button_style">
+        <item name="android:text">Request Permission</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/home_object_color</item>
+        <item name="android:textSize">@dimen/home_object_dimen</item>
+    </style>
+
+    <style name="animation_button_style">
+        <item name="android:text">Request Permission</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/home_object_color</item>
+        <item name="android:textSize">@dimen/home_object_dimen</item>
+    </style>
+
     <style name="myname">
         <item name="color">@color/home_object_color</item>
         <item name="android:textSize">@dimen/home_object_dimen</item>

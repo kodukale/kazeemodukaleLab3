@@ -35,8 +35,7 @@ Section: 002 -->
 
     <Button
         android:id="@+id/btnStartAnim"
-        android:layout_width="113dp"
-        android:layout_height="60dp"
+        style="@style/animation_button_style"
         android:layout_marginTop="68dp"
         android:text="Start"
         app:layout_constraintEnd_toStartOf="@+id/btnStopAnim"
@@ -46,8 +45,7 @@ Section: 002 -->
 
     <Button
         android:id="@+id/btnStopAnim"
-        android:layout_width="113dp"
-        android:layout_height="60dp"
+        style="@style/animation_button_style"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="48dp"
         android:text="Stop"

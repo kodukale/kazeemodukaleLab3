@@ -16,6 +16,11 @@ Section: 002 -->
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/kazeem_btn_permission"
+            style="@style/permission_button_style"
+            android:text="@string/request_permission"/>
+
         <LinearLayout
             android:id="@+id/ButtonRow"
             android:layout_width="wrap_content"
